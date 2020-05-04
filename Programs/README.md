@@ -68,7 +68,29 @@ print(convert_usd_to_aud(100, .78))
 print(convert_usd_to_aud(100, rate=.78))
 ```
 
-###### Iterative and Recursive functions
+###### Iterative and Recursive Functions
+_Factorial program:_
+```python
+# Iterative way
+def fibonacci_recursion(n):
+    if n == 0 or n == 1:
+        return n
+    
+    return fibonacci_recursion(n - 2) + fibonacci_recursion(n - 1)
+
+print(factorial_iterative(6)) # 720
+
+# Recursive way
+def factorial_recursion(n):
+    if n == 1:
+        return 1
+    
+    return n * factorial_recursion(n - 1)
+
+print(factorial_recursion(6)) # 720
+```
+
+_Fibonacci program:_
 ```python
 # Iterative way
 def fibonacci_iterative(n):
@@ -87,6 +109,78 @@ def fibonacci_recursion(n):
         return n
     
     return fibonacci_recursion(n - 2) + fibonacci_recursion(n - 1)
+
+# Using Dynamic Programming, stored the previous value
+storage = { 0: 0, 1: 1 }
+def fibonacci_dynamic(n):
+    if n in storage:
+        return storage[n]
+    else:
+        storage[n] = fibonacci_dynamic(n - 2) + fibonacci_dynamic(n - 1)
+        return storage[n]
+        
+print(fibonacci_dynamic(100)) # 354224848179261915075
+```
+
+###### Variable scope
+```python
+# Local scope
+x = 3
+def my_func():
+    x = 5
+    print(x) # 5
+my_func()
+print(x) # 3
+
+# Global scope
+"""
+To use the existing globally defined variable
+"""
+x = 3
+def my_func():
+    global x
+    x = 5
+    print(x) # 5
+my_func()
+print(x) # 5
+
+# Nonlocal scope
+"""
+It looks "one level up" in the code
+"""
+x = 4
+def myfunc():
+    x = 3
+    def inner():
+        nonlocal x
+        print(x) # 3
+    inner()
+myfunc()
+print(x) # 4
+```
+
+##### Lambda Functions
+Lambda functions are small, anonymous functions that can be defined in a simple one-line syntax:
+```python
+lambda arguments : expression
+```
+
+```python
+add = lambda x, y: x + y
+print(add(2, 5)) # 7
+
+# map
+nums = [-3, 1, 4, 7]
+result = map(lambda x: x * 2, nums)
+print(list(result)) # [-6, 2, 8, 14]
+
+# filter
+"""
+Print all even numbers upto 10
+"""
+nums = list(range(11))
+filtered = filter(lambda x: x % 2 == 0, nums)
+list(filtered) # [0, 2, 4, 6, 8, 10]
 ```
 
 
