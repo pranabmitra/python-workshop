@@ -86,4 +86,99 @@ print(p) # current working directory
 
 txt_files = p.glob("*.txt")
 print("*.txt:", list(txt_files)) # all *.txt files from the current directory
+
+# To get the all hidden files from the HOME directory
+import pathlib
+p = pathlib.Path.home()
+print(list(p.glob(".*")))
+```
+
+###### Logging
+```python
+import logging
+
+logger = logging.getLogger("logger_name")
+
+logger.debug("Logging at debug")
+logger.info("Logging at info")
+logger.warning("Logging at warning")
+logger.error("Logging at error")
+logger.fatal("Logging at fatal")
+
+# example
+import logging
+
+try:
+    int("nope")
+except Exception:
+    logging.error("Something bad happened", exc_info=True)
+# Because of using `exc_info=True`, it will print the Traceback with details
+```
+
+
+###### Collections
+Besides the basic collections (list, dict, tuple, and set), we have some advanced collections (counter, defauldict, and chainmap) in python.
+
+- Counter:
+A counter is a class that allows us to count hashable objects. It has keys and values as a dictionary (it actually inherits from dict) to store objects as keys and the number of occurrences in values.
+
+```python
+# Counter
+import urllib.request
+
+url = 'https://www.w3.org/TR/PNG/iso_8859-1.txt'
+response = urllib.request.urlopen(url)
+words = response.read().decode().split()
+len(words)  # 858
+
+import collections
+word_counter = collections.Counter(words)
+
+for word, count in word_counter.most_common(5):
+    print(word, "-", count)
+
+# we can print the word count like below:
+print("PYTHON", "-", word_counter["PYTHON"])
+```
+
+- defaultdict
+This class behaves like a dict but allows us to provide a factory method to be used when a key is missing.
+```python
+import collections
+
+data = collections.defaultdict(int)
+"""
+Whether `x` is in `data` or not, we don't need to consider.
+"""
+def function(x):
+    data[x] += 1
+```
+
+- ChainMap
+ChainMap is a structure that allows us to combine lookups for multiple mapping objects, usually dictionaries. It can be seen as a multi-level object.
+
+```python
+import collections
+
+_defaults = {
+    "appetizers": "Hummus",
+    "main": "Pizza",
+    "desert": "Chocolate cake",
+    "drink": "Water",
+}
+
+def prepare_menu(customizations):
+    return collections.ChainMap(customizations, _defaults)
+
+def print_menu(menu):
+    for key, value in menu.items():
+        print(f"As {key}: {value}.")
+
+# uses
+menu1 = prepare_menu({})
+print_menu(menu1)
+
+# customized menu
+menu2 = prepare_menu({"drink": "Red Wine", "side": "French fries"})
+print_menu(menu2)
 ```
