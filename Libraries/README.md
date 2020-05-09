@@ -182,3 +182,44 @@ print_menu(menu1)
 menu2 = prepare_menu({"drink": "Red Wine", "side": "French fries"})
 print_menu(menu2)
 ```
+
+###### LRU Cache
+```python
+"""
+Reuse the values from the previous call.
+LRU cache should be used only in functions.
+"""
+import functools
+import time
+
+@functools.lru_cache()
+def func(x):
+    time.sleep(1)
+    print(f"Heavy operation for {x}")
+    return x * 10
+
+# uses
+print("Func returned:", func(1)) # Heavy operation for 1, Func returned: 10
+print("Func returned:", func(1)) # Func returned: 10 (from cache)
+print("Func returned:", func(2)) # Heavy operation for 2, Func returned: 20
+
+# we can limit the max size (default is 128 elements)
+@functools.lru_cache(maxsize=2)
+
+# we can even cache the whole function
+cached_func = functools.lru_cache()(func)
+print(cached_func(1))
+```
+
+###### Partial
+```python
+def func(x, y, z):
+    print("x:", x)
+    print("y:", y)
+    print("z:", z)
+func(1, 2, 3) # x: 1, y: 2, z: 3
+
+import functools
+new_func = functools.partial(func, z='10')
+new_func(1, 2) # x: 1, y: 2, z: 10
+```
