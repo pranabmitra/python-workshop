@@ -47,3 +47,71 @@ courses['python'] = 'This is Python'
 print(courses['python']) # This is Python
 print(courses['java']) # No entry!
 ```
+
+###### Infinite Sequences and takewhile
+The `__next__()` method never raises a `StopIteration` error. That means it never exits. We can fix this by using the `takewhile` function from `itertools` module to produce a finite sequence.
+
+```python
+class Primes:
+    def __init__(self):
+        self.current = 2
+    def __iter__(self):
+        return self
+    def __next__(self):
+        while True:
+            current = self.current
+            square_root = int(current ** 0.5)
+            is_prime = True
+            if square_root >= 2:
+                for i in range(2, square_root + 1):
+                    if current % i == 0:
+                        is_prime = False
+                        break
+            self.current += 1
+            if is_prime:
+                return current
+
+# call
+import itertools
+
+print([p for p in itertools.takewhile(lambda x: x < 100, Primes())])
+# [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+
+# Below code will make the list infinite 
+itertools.cycle(['White', 'Black'])
+```
+
+###### Generators
+```python
+"""
+Generate prime numbsers using gernerators
+"""
+def primes(bound):
+    candidates = list(range(2,bound))
+    while(len(candidates) > 0):
+        yield candidates[0]
+        candidates = [c for c in candidates if c % candidates[0] != 0]
+
+# uses
+print([prime for prime in primes(100)])
+# [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+```
+
+###### Regex
+```python
+# name has `X` or `x` character
+names = ["Xander Harris", "Jennifer Smith", "Timothy Jones", "Amy Alexandrescu",
+"Peter Price", "Weifung Xu"]
+nameWithX = [name for name in names if re.search("[Xx]", name)]
+print(nameWithX)
+# ['Xander Harris', 'Amy Alexandrescu', 'Weifung Xu']
+
+# Remove all digits from the text
+import re
+
+text = "2 Dogs and 3 Cats"
+pattern = "[0-9]"
+replacement = ""
+re.sub(pattern, replacement, text)
+# ' Dogs and  Cats'
+```
