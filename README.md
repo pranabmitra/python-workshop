@@ -20,3 +20,4 @@ Install [Python Terminal](https://www.python.org/downloads/) on the system.
 * [Libraries](https://github.com/pranabmitra/python-workshop/tree/master/Libraries)
 * [Comprehensions](https://github.com/pranabmitra/python-workshop/tree/master/Comprehensions)
 * [Unit Test](https://github.com/pranabmitra/python-workshop/tree/master/Tests)
+* [Virtual Environment](https://github.com/pranabmitra/python-workshop/tree/master/Environment)
