@@ -65,3 +65,35 @@ matrix[:, -1].mean() # 0.3425185723398862
 big_matrix = np.random.rand(100000, 100)
 big_matrix.mean()
 ```
+
+###### Creating Array using NumPy
+```python
+import numpy as np
+# generate 100 (1, 100) length array
+np.arange(1, 101)
+# [1,2,3,....100]
+
+np.arange(1, 101, 5) # length: 20
+# [ 1,  6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76, 81, 86, 91, 96]
+
+# generate 10*10 array
+np.arange(1, 101).reshape(10,10)
+np.arange(1, 101, 5).reshape(4, 5)
+# array([[ 1,  6, 11, 16, 21],
+#       [26, 31, 36, 41, 46],
+#       [51, 56, 61, 66, 71],
+#       [76, 81, 86, 91, 96]])
+
+mat = np.arange(1, 101, 5).reshape(4,5)
+# we can do the following operations to add, square the matrix
+mat + mat
+mat * 2
+mat * mat
+mat.T # transpose: turns rows into columns and columns into rows
+# array([[ 1, 26, 51, 76],
+#       [ 6, 31, 56, 81],
+#       [11, 36, 61, 86],
+#       [16, 41, 66, 91],
+#       [21, 46, 71, 96]])
+
+```
