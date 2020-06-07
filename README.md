@@ -21,3 +21,4 @@ Install [Python Terminal](https://www.python.org/downloads/) on the system.
 * [Comprehensions](https://github.com/pranabmitra/python-workshop/tree/master/Comprehensions)
 * [Unit Test](https://github.com/pranabmitra/python-workshop/tree/master/Tests)
 * [Virtual Environment](https://github.com/pranabmitra/python-workshop/tree/master/Environment)
+* [Data Analytics](https://github.com/pranabmitra/python-workshop/tree/master/Data_Analytics)
