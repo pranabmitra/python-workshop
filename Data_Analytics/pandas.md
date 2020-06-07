@@ -87,3 +87,11 @@ D	NaN	NaN	72	72.000000
 """
 ```
 
+###### Type of files pandas can read
+| File Type    | Read Command               |
+| -------------| ---------------------------|
+| csv          | pd.read_csv('file_name')   |
+| excel        | pd.read_excel('file_name') |
+| json         | pd.read_json('file_name')  |
+| html         | pd.read_html('file_name')  |
+| sql          | pd.read_sql('file_name')   |
